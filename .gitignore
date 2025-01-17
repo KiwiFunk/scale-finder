@@ -398,3 +398,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#project specific
+scale-finder.csproj
+scale-finder.sln
