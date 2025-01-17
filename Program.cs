@@ -16,8 +16,10 @@ if (index == -1)
 }
 
 // Major Scale intervals: W, W, H, W, W, W, H
+int[] majorIntervals = new int[] { 2, 2, 1, 2, 2, 2, 1 };   // Whole step = 2, Half step = 1
 
 //Minor Scale intervals: W, H, W, W, H, W, W
+int[] minorIntervals = new int[] { 2, 1, 2, 2, 1, 2, 2 };
 
 //Create Scale starting from root note
 
