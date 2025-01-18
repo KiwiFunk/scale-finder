@@ -41,6 +41,7 @@ do
                 index = (index + majorIntervals[i - 1]) % notes.Length;     //Use modulus to avoid going out of bounds
                 scale[i] = notes[index];                                    //Set the next note in the scale
             }
+            SharpToFlat(scale);
             Console.WriteLine($"The {rootNote} Major Scale is: ");
             Console.WriteLine(string.Join(" ", scale));
             validInput = true;
@@ -53,6 +54,7 @@ do
                 index = (index + minorIntervals[i - 1]) % notes.Length;     
                 scale[i] = notes[index];                                    
             }
+            SharpToFlat(scale);
             Console.WriteLine($"The {rootNote} Minor Scale is: ");
             Console.WriteLine(string.Join(" ", scale));
             validInput = true;
@@ -64,6 +66,30 @@ do
 } while (!validInput);                                                      //Loop until valid string is entered.
 
 
-/*
-    Add logic/method to handle sharps and flats.
-*/
+void SharpToFlat(string[] scale)
+{
+    for (int i = 0; i < scale.Length; i++)
+    {
+        if (scale[i].Contains('#'))                                                                     // Only process notes with sharps
+        {
+            char baseNote = scale[i][0];                                                                // Get first character of current note (Not the same as 2D array)
+            
+            for (int j = 0; j < scale.Length; j++)                                                      // Look for any other notes that start with same letter without sharp
+            {
+                if (j != i && scale[j].StartsWith(baseNote.ToString()) && !scale[j].Contains('#'))      //Avoid comparing to self with j != i
+                {
+                    // Convert sharp to flat of next note
+                    switch (scale[i])
+                    {
+                        case "C#": scale[i] = "Db"; break;
+                        case "D#": scale[i] = "Eb"; break;
+                        case "F#": scale[i] = "Gb"; break;
+                        case "G#": scale[i] = "Ab"; break;
+                        case "A#": scale[i] = "Bb"; break;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+}
